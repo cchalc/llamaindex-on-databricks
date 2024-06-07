@@ -16,22 +16,22 @@ token = context.apiToken().get()
 host = context.apiUrl().get()
 
 service_context = ServiceContext.from_defaults(
-    llm=DatabricksLLM(endpoint="databricks-llama-2-70b-chat"),
-    embed_model=DatabricksEmbedding(endpoint="databricks-bge-large-en"),
-    context_window=2048,
+    llm=DatabricksLLM(endpoint="cjc-llama2"),
+    embed_model=DatabricksEmbedding(endpoint="databricks_e5_v2"),
+    context_window=512,
     num_output=256,
 )
 set_global_service_context(service_context)
 
 # COMMAND ----------
 dvs = DatabricksVectorStore(
-    endpoint="dbdemos_vs_endpoint",
-    index_name="main__build.rag_chatbot_michael_shtelma.databricks_pdf_documentation_self_managed_vs_index",
+    endpoint="one-env-shared-endpoint-0",
+    index_name="cjc.scratch.vci",
     host=host,
     token=token,
-    text_field="content",
+    text_field="Text",
     embedding_field="embedding",
-    id_field="id",
+    id_field="ArticleId",
 )
 # dvs.add(docs_list)
 dvs_index = VectorStoreIndex.from_vector_store(dvs)
@@ -41,5 +41,5 @@ query_engine = dvs_index.as_query_engine()
 # COMMAND ----------
 
 # Query and print response
-response = query_engine.query("What is Unity Catalog?")
+response = query_engine.query("What is enron payout?")
 print(response)

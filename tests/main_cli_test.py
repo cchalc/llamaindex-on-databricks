@@ -26,11 +26,11 @@ from rag_demo.vectorstore import DatabricksVectorStore
 def main_simple_rag():
     # client = get_deploy_client("databricks")
     # print(client.list_endpoints())
-    databricks_embedding_model = DatabricksEmbedding()
+    databricks_embedding_model = DatabricksEmbedding(endpoint="databricks_e5_v2")
     service_context = ServiceContext.from_defaults(
-        llm=DatabricksLLM(endpoint="databricks-llama-2-70b-chat"),
+        llm=DatabricksLLM(endpoint="cjc_llama2"),
         embed_model=databricks_embedding_model,
-        context_window=2048,
+        context_window=512,
         num_output=256,
     )
     set_global_service_context(service_context)
@@ -61,19 +61,19 @@ def main_simple_rag():
     # )
     dvs = DatabricksVectorStore(
         endpoint="dbdemos_vs_endpoint",
-        index_name="main__build.rag_chatbot_michael_shtelma.databricks_pdf_documentation_self_managed_vs_index",
+        index_name="cjc.scratch.vci",
         host="https://e2-demo-field-eng.cloud.databricks.com",
         token=os.environ["DATABRICKS_TOKEN"],
-        text_field="content",
+        text_field="Text",
         embedding_field="embedding",
-        id_field="id",
+        id_field="ArticleId",
     )
     # dvs.add(docs_list)
     dvs_index = VectorStoreIndex.from_vector_store(dvs)
     query_engine = dvs_index.as_query_engine()
 
     # Query and print response
-    response = query_engine.query("What is Databricks Delta ?")
+    response = query_engine.query("What is the enron payout?")
     print(response)
 
 

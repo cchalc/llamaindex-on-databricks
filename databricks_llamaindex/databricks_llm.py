@@ -19,13 +19,13 @@ from llama_index.llms.base import llm_completion_callback, llm_chat_callback
 from mlflow.deployments import get_deploy_client
 
 # set context window size
-context_window = 2048
+context_window =512 
 # set number of output tokens
 num_output = 256
 
 
 class DatabricksLLM(CustomLLM, extra=Extra.allow):
-    endpoint: Optional[str] = "databricks-llama-2-70b-chat"
+    endpoint: Optional[str] = "cjc_llama2"
 
     def __init__(self, **data: Any):
         super().__init__(**data)
@@ -60,7 +60,7 @@ class DatabricksLLM(CustomLLM, extra=Extra.allow):
 
 
 class DatabricksEmbedding(BaseEmbedding, extra=Extra.allow):
-    endpoint: Optional[str] = "databricks-bge-large-en"
+    endpoint: Optional[str] = "databricks_e5_v2"
 
     def __init__(self, **data: Any):
         super().__init__(**data)
