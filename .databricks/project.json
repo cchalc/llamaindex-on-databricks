@@ -1,0 +1,7 @@
+{
+  "host": "https://e2-demo-field-eng.cloud.databricks.com/",
+  "authType": "databricks-cli",
+  "databricksPath": "/Users/christopher.chalcraft/.vscode/extensions/databricks.databricks-1.3.0-darwin-x64/bin/databricks",
+  "clusterId": "0509-224923-chkwpzmb",
+  "workspacePath": "/Users/christopher.chalcraft@databricks.com/.ide/llamaindex-on-databricks-da995831"
+}
