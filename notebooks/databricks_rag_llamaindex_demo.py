@@ -21,7 +21,7 @@ host = context.apiUrl().get()
 
 service_context = ServiceContext.from_defaults(
     llm=DatabricksLLM(endpoint="cjc-llama2"),
-    embed_model=DatabricksEmbedding(endpoint="databricks_e5_v2"),
+    embed_model=DatabricksEmbedding(endpoint="cjc-bge-small"),
     context_window=512,
     num_output=256,
 )
@@ -31,7 +31,7 @@ set_global_service_context(service_context)
 
 dvs = DatabricksVectorStore(
     endpoint="one-env-shared-endpoint-8",
-    index_name="cjc.scratch.bbc_news_train_index",
+    index_name="cjc.scratch.bbc_news_train_vs_index",
     host=host,
     token=token,
     text_field="Text",

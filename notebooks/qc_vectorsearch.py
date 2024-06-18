@@ -93,23 +93,23 @@ print(f"Endpoint named {VECTOR_SEARCH_ENDPOINT_NAME} is ready.")
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC ALTER TABLE cjc.scratch.bbc_news_train SET TBLPROPERTIES (delta.enableChangeDataFeed = true)
+# %sql
+# ALTER TABLE cjc.scratch.bbc_news_train SET TBLPROPERTIES (delta.enableChangeDataFeed = true)
 
 # COMMAND ----------
 
 SOURCE_NAME = "cjc.scratch.bbc_news_train"
 VS_INDEX_FULLNAME = "cjc.scratch.bbc_news_train_vs_index"
 
-index = vsc.create_delta_sync_index(
-  endpoint_name=VECTOR_SEARCH_ENDPOINT_NAME,
-  source_table_name=SOURCE_NAME,
-  index_name=VS_INDEX_FULLNAME,
-  pipeline_type='TRIGGERED',
-  primary_key="ArticleId",
-  embedding_source_column="Text",
-  embedding_model_endpoint_name="cjc-bge-small"
-)
+# index = vsc.create_delta_sync_index(
+#   endpoint_name=VECTOR_SEARCH_ENDPOINT_NAME,
+#   source_table_name=SOURCE_NAME,
+#   index_name=VS_INDEX_FULLNAME,
+#   pipeline_type='TRIGGERED',
+#   primary_key="ArticleId",
+#   embedding_source_column="Text",
+#   embedding_model_endpoint_name="databricks_e5_v2"
+# )
 
 # COMMAND ----------
 
